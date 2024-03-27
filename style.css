@@ -12,4 +12,19 @@ h1 {
 	width: 700px;
 	height: 1000px;
 	background: grey;
+/*	display: flex;*/
+/*	flex-direction: column;*/
 }
+
+.main-container1 {
+	display: flex;
+}
+
+.numbers {
+}
+
+.operands {
+	display: flex;
+	flex-direction: column;
+}
+
