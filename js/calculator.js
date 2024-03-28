@@ -27,28 +27,47 @@ function respond(btn) {
 		workingA += btn;
 		display.textContent = workingA;
 	} else if (String(btn) == '+') {
-		lastOperand = '+';
 		if (workingB == '') {
 			workingB = Number(workingA)
 			workingA = ''
-		} else {
+		} else if (lastOperand == '+'){
 			workingB += Number(workingA)
 			display.textContent = workingB;
 			workingA = ''
-		}
-	} else if (String(btn) == '=') {
-		display.textContent = equals(lastOperand);
-		// equals(lastOperand)
+		} 
+		lastOperand = '+';
+	} else if (String(btn) == '-') {
+		if (workingB == '') {
+			workingB = Number(workingA)
+			workingA = ''
+		} else if (lastOperand == '-') {
+			workingB -= Number(workingA)
+			display.textContent = workingB;
+			workingA = ''
+		} 
+		lastOperand = '-';
+	}	else if (String(btn) == '=') {
+		console.log(lastOperand)
+		equals(lastOperand);
+		display.textContent = workingB
 	}
 }
 
 function equals(operand) {
+	let a = Number(workingA)
+	let b = Number(workingB)
 	let result
+
 	switch (operand) {
 	case '+':
-		result = Number(workingA) + Number(workingB)
+		result = add(a, b);
+		break;
+	case '-':
+		result = subtract(b, a)
+		break;
 	}
-	return result
+	workingB = String(result)
+	workingA = ''
 }
 
 function add(a, b) {
@@ -63,7 +82,7 @@ function multiply(a, b) {
 	return (a * b)
 }
 
-function add(a, b) {
+function divide(a, b) {
 	return (a / b)
 }
 
