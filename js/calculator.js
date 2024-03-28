@@ -1,29 +1,34 @@
 const container = document.querySelector(".container");
 const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
-const numbers = document.querySelectorAll(".row-one");
 
 let workingA = ''
 let workingB = ''
 let lastOperand = ''
+let equalUsed = false
 
 document.addEventListener('click', function(e){
   if(e.target.tagName=="BUTTON"){respond(e.target.innerHTML)}
-})
+  	// console.log(`A: ${workingA}`)
+  	// console.log(`B: ${workingB}`)
+  	// console.log(`Oper: ${lastOperand}`)
+	})
 
 
 function respond(btn) {	
 	const strBtn = String(btn)
 
 	if (btn.match(/[0-9]/g)) {
-		workingA += btn;
-		display.textContent = workingA;
+			workingA += btn;
+			display.textContent = workingA;
 	} else if (strBtn == '=') {
-		equals(lastOperand);
-		display.textContent = workingB
+			equals(lastOperand);
+			equalUsed = true
+			display.textContent = workingB
 	} else if (strBtn == 'AC'){
-		reset()
-	} else {operatorLogic(strBtn)}
+			reset()
+	} else {operatorLogic(strBtn); equalUsed = false}
+
 }
 
 function operatorLogic(currentOperand){
@@ -31,6 +36,9 @@ function operatorLogic(currentOperand){
 		workingB = Number(workingA)
 	} else if (lastOperand == currentOperand){
 		equals(currentOperand)
+	} else if (equalUsed == true) {
+		workingA = ''
+		equals(lastOperand)
 	} else {equals(lastOperand)}
 	workingA = ''
 	lastOperand = currentOperand;
@@ -55,8 +63,8 @@ function equals(operand) {
 		result = divide(b, a)
 		break;
 	}
+
 	workingB = String(result)
-	workingA = ''
 	display.textContent = workingB;
 }
 
