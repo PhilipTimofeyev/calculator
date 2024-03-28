@@ -2,6 +2,7 @@ const container = document.querySelector(".container");
 const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
 
+display.textContent = '0'
 let workingA = ''
 let workingB = ''
 let lastOperand = ''
@@ -22,6 +23,7 @@ function respond(btn) {
 			workingA += btn;
 			display.textContent = workingA;
 	} else if (strBtn == '=') {
+			if (workingB == '') {return}
 			equals(lastOperand);
 			equalUsed = true
 			display.textContent = workingB
