@@ -1,11 +1,14 @@
 const container = document.querySelector(".container");
 const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
+const rowFour = document.querySelector(".row-four");
+const pointNode = document.querySelector("#point");
 
 let workingA = ''
 let workingB = ''
 let lastOperand = ''
 let equalUsed = false
+let point = true
 
 display.textContent = '0'
 
@@ -15,7 +18,7 @@ document.addEventListener('click', function(e){
   	console.log(`B: ${workingB}`)
   	console.log(`Oper: ${lastOperand}`)
   	console.log(`equals: ${equalUsed}`)
-	})
+})
 
 
 function respond(btn) {	
@@ -35,6 +38,7 @@ function respond(btn) {
 		operatorLogic(strBtn);
 		equalUsed = false;
 	}
+	removePoint()
 }
 
 function operatorLogic(currentOperand){
@@ -76,6 +80,7 @@ function operate(operand) {
 	}
 
 	workingB = roundTo(result, 10)
+	point = false
 	display.textContent = workingB;
 }
 
@@ -105,7 +110,7 @@ function reset() {
 }
 
 function checkIfNumber(str){
-	return str.match(/[0-9]/g)
+	return (/[0-9.]/g).test(str)
 }
 
 function checkIfProdOrQuot() {
@@ -120,4 +125,13 @@ function roundTo(num, tenth) {
 	return parseFloat(num.toFixed(tenth))
 }
 
+function removePoint() {
+	if ((/[.]/g).test(workingA) && point) {
+		rowFour.removeChild(pointNode);
+		point = false;
+	} else if (workingA == '') {
+		rowFour.appendChild(pointNode)
+		point = true
+	}
+}
 
