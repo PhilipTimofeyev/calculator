@@ -3,13 +3,6 @@ const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
 const numbers = document.querySelectorAll(".row-one");
 
-// numbers.forEach(function(elem) {
-// 	console.log(elem);
-//     elem.addEventListener("input", function() {
-//         alert("YAY")
-//     });
-// });
-
 let workingA = ''
 let workingB = ''
 let lastOperand = ''
@@ -17,25 +10,20 @@ let lastOperand = ''
 document.addEventListener('click', function(e){
   if(e.target.tagName=="BUTTON"){
    console.log(respond(e.target.innerHTML))
-   // display.textContent = workingA;
   }
 })
 
 
 function respond(btn) {	
 	const strBtn = String(btn)
-	
+
 	if (btn.match(/[0-9]/g)) {
 		workingA += btn;
 		display.textContent = workingA;
-	} else if (strBtn == '+') {
-		operatorLogic('+')
-	} else if (strBtn == '-') {
-		operatorLogic('-')
-	}	else if (strBtn == '=') {
+	} else if (strBtn == '=') {
 		equals(lastOperand);
 		display.textContent = workingB
-	}
+	} else {operatorLogic(strBtn)}
 }
 
 function operatorLogic(currentOperand){
@@ -43,8 +31,7 @@ function operatorLogic(currentOperand){
 		workingB = Number(workingA)
 	} else if (lastOperand == currentOperand){
 		equals(currentOperand)
-		display.textContent = workingB;
-	} 
+	} else {equals(lastOperand)}
 	workingA = ''
 	lastOperand = currentOperand;
 }
@@ -61,9 +48,13 @@ function equals(operand) {
 	case '-':
 		result = subtract(b, a)
 		break;
+	case '*':
+		result = multiply(a, b)
+		break;
 	}
 	workingB = String(result)
 	workingA = ''
+	display.textContent = workingB;
 }
 
 function add(a, b) {
