@@ -51,6 +51,9 @@ function equals(operand) {
 	case '*':
 		result = multiply(a, b)
 		break;
+	case '/':
+		result = divide(b, a)
+		break;
 	}
 	workingB = String(result)
 	workingA = ''
