@@ -23,34 +23,30 @@ document.addEventListener('click', function(e){
 
 
 function respond(btn) {	
+	const strBtn = String(btn)
+	
 	if (btn.match(/[0-9]/g)) {
 		workingA += btn;
 		display.textContent = workingA;
-	} else if (String(btn) == '+') {
-		if (workingB == '') {
-			workingB = Number(workingA)
-			workingA = ''
-		} else if (lastOperand == '+'){
-			workingB += Number(workingA)
-			display.textContent = workingB;
-			workingA = ''
-		} 
-		lastOperand = '+';
-	} else if (String(btn) == '-') {
-		if (workingB == '') {
-			workingB = Number(workingA)
-			workingA = ''
-		} else if (lastOperand == '-') {
-			workingB -= Number(workingA)
-			display.textContent = workingB;
-			workingA = ''
-		} 
-		lastOperand = '-';
-	}	else if (String(btn) == '=') {
-		console.log(lastOperand)
+	} else if (strBtn == '+') {
+		operatorLogic('+')
+	} else if (strBtn == '-') {
+		operatorLogic('-')
+	}	else if (strBtn == '=') {
 		equals(lastOperand);
 		display.textContent = workingB
 	}
+}
+
+function operatorLogic(currentOperand){
+	if (workingB == '') {
+		workingB = Number(workingA)
+	} else if (lastOperand == currentOperand){
+		equals(currentOperand)
+		display.textContent = workingB;
+	} 
+	workingA = ''
+	lastOperand = currentOperand;
 }
 
 function equals(operand) {
