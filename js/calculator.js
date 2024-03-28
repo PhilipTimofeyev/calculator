@@ -8,9 +8,7 @@ let workingB = ''
 let lastOperand = ''
 
 document.addEventListener('click', function(e){
-  if(e.target.tagName=="BUTTON"){
-   console.log(respond(e.target.innerHTML))
-  }
+  if(e.target.tagName=="BUTTON"){respond(e.target.innerHTML)}
 })
 
 
@@ -23,6 +21,8 @@ function respond(btn) {
 	} else if (strBtn == '=') {
 		equals(lastOperand);
 		display.textContent = workingB
+	} else if (strBtn == 'AC'){
+		reset()
 	} else {operatorLogic(strBtn)}
 }
 
@@ -74,6 +74,13 @@ function multiply(a, b) {
 
 function divide(a, b) {
 	return (a / b)
+}
+
+function reset(){
+	workingA = '';
+	workingB = '';
+	lastOperand = '';
+	display.textContent = '0'
 }
 
 
