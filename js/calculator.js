@@ -73,6 +73,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+	if (b == 0) {
+		return display.textContent = 'NO DIVIDING BY ZERO';
+	}
 	return (a / b)
 }
 
@@ -84,5 +87,3 @@ function reset(){
 }
 
 
-
-// console.log("Hello1".match(/[0-9]/g))
