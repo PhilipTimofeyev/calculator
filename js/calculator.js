@@ -29,7 +29,7 @@ function respond(btn) {
 		equals()
 
 	} else if (strBtn == 'AC'){
-			reset()
+		reset()
 
 	} else {
 		operatorLogic(strBtn);
@@ -42,7 +42,6 @@ function operatorLogic(currentOperand){
 		workingB = workingA
 
 	} else if (lastOperand == currentOperand){
-		// workingA = ''
 		checkIfProdOrQuot()
 		operate(currentOperand)
 
@@ -76,7 +75,7 @@ function operate(operand) {
 		break;
 	}
 
-	workingB = String(result)
+	workingB = roundTo(result, 10)
 	display.textContent = workingB;
 }
 
@@ -95,7 +94,6 @@ function equals() {
 
 	operate(lastOperand);
 	equalUsed = true;
-	display.textContent = workingB;
 }
 
 function reset() {
@@ -116,6 +114,10 @@ function checkIfProdOrQuot() {
 	} else {
 		workingA = ''
 	}
+}
+
+function roundTo(num, tenth) {
+	return parseFloat(num.toFixed(tenth))
 }
 
 
