@@ -22,8 +22,8 @@ function respond(btn) {
 	const strBtn = String(btn)
 
 	if (checkIfNumber(strBtn)) {
-			workingA += btn;
-			display.textContent = workingA;
+		workingA += btn;
+		display.textContent = workingA;
 
 	} else if (strBtn == '=') {
 		equals()
@@ -42,10 +42,12 @@ function operatorLogic(currentOperand){
 		workingB = workingA
 
 	} else if (lastOperand == currentOperand){
+		// workingA = ''
+		checkIfProdOrQuot()
 		operate(currentOperand)
 
 	} else if (equalUsed == true) {
-		workingA = ''
+		checkIfProdOrQuot()
 		operate(lastOperand)
 
 	} else {operate(lastOperand)
@@ -85,12 +87,12 @@ function subtract(a, b) {return (a - b)}
 function multiply(a, b) {return (a * b)}
 
 function divide(a, b) {
-	// return (a / b)
 	return b == 0 ? display.textContent = 'NO DIVIDING BY ZERO' : (a / b)
 }
 
 function equals() {
 	if (workingB == '') {return}
+
 	operate(lastOperand);
 	equalUsed = true;
 	display.textContent = workingB;
@@ -106,6 +108,14 @@ function reset() {
 
 function checkIfNumber(str){
 	return str.match(/[0-9]/g)
+}
+
+function checkIfProdOrQuot() {
+	if ((lastOperand == '*') || (lastOperand == '/')) {
+		workingA = '1'
+	} else {
+		workingA = ''
+	}
 }
 
 
