@@ -13,7 +13,7 @@ display.textContent = '0'
 document.addEventListener('keydown', (event)=> {    
   let input = event.key
 
-  if ((/[0-9/+=*-]/g).test(input) || event.key == 'Backspace') {
+  if ((/[0-9/+=%*-]/g).test(input) || event.key == 'Backspace') {
   	respond(input)
   } else if (input == '.' && !(/[.]/g).test(workingA)) {
   	respond(input)
@@ -43,7 +43,9 @@ function respond(btn) {
 	} else if (strBtn == 'AC'){
 		reset()
 
-	} else {
+	} else if (strBtn == '%') {
+		convertToPercent()
+	}	else {
 		operatorLogic(strBtn);
 		equalUsed = false;
 	}
@@ -170,26 +172,36 @@ function negate() {
 	equalUsed ? toggleNegativeB() : toggleNegativeA()
 }
 
-	function toggleNegativeA() {
-		if (workingA == '') {return}
+function toggleNegativeA() {
+	if (workingA == '') {return}
 
-		if ((/[-]/g).test(workingA)) {
-			workingA = workingA.match(/[0-9.]/g).join('')
+	if ((/[-]/g).test(workingA)) {
+		workingA = workingA.match(/[0-9.]/g).join('')
 
-		} else {workingA = "".concat("-",workingA)}
-		display.textContent = workingA	
-	}
+	} else {workingA = "".concat("-",workingA)}
+	display.textContent = workingA	
+}
 
-	function toggleNegativeB() {
-		if (workingB == '') {return}
-		if ((/[-]/g).test(workingB)) {
-			workingB = workingB.match(/[0-9.]/g).join('')
+function toggleNegativeB() {
+	if (workingB == '') {return}
+	if ((/[-]/g).test(workingB)) {
+		workingB = workingB.match(/[0-9.]/g).join('')
 
-		} else {workingB = "".concat("-",workingB)}
+	} else {workingB = "".concat("-",workingB)}
+	display.textContent = workingB
+}
+
+function convertToPercent() {
+	if (workingA == '') {return}
+
+	if (equalUsed) {
+		workingB = divide(Number(workingB), 100)
 		display.textContent = workingB
-		
+	} else {
+		workingA = divide(Number(workingA), 100)
+		display.textContent = workingA
 	}
-
+}
 
 
 
