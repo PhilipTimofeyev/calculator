@@ -37,6 +37,7 @@ function respond(btn) {
 	const strBtn = String(btn)
 
 	if (checkIfNumber(strBtn)) {
+		if (equalUsed) {reset()}
 		workingA += btn;
 		display.textContent = workingA;
 
