@@ -23,13 +23,13 @@ document.addEventListener('click', function(e){
 function keyInputParser (event) {    
   let input = event.key
 
-  if ((/[0-9/+=%*-]/g).test(input)) {
+  if ((/[0-9/+%*=-]/g).test(input) || input == 'Enter') {
   	respond(input)
   } else if (input == '.' && !(/[.]/g).test(workingA)) {
   	respond(input)
   } else if (input == 'Backspace') {
   	respond('Del')
-  }
+  } 
 };
 
 function respond(btn) {	
@@ -40,7 +40,7 @@ function respond(btn) {
 		backspace()
 	} else if (strBtn == '+/-') {
 		negate()
-	} else if (strBtn == '=') {
+	} else if (strBtn == '=' || strBtn == 'Enter') {
 		equals()
 	} else if (strBtn == 'AC'){
 		reset()
@@ -156,7 +156,6 @@ function removePoint() {
 }
 
 function backspace() {
-	console.log(workingA)
 	if (equalUsed) {
 		return reset()
 	}	else if ((/[-]/g).test(workingA) && workingA.length < 3) {
