@@ -13,10 +13,12 @@ display.textContent = '0'
 document.addEventListener('keydown', (event)=> {    
   let input = event.key
 
-  if ((/[0-9/+=%*-]/g).test(input) || event.key == 'Backspace') {
+  if ((/[0-9/+=%*-]/g).test(input)) {
   	respond(input)
   } else if (input == '.' && !(/[.]/g).test(workingA)) {
   	respond(input)
+  } else if (input == 'Backspace') {
+  	respond('Del')
   }
 });
 
@@ -29,7 +31,7 @@ function respond(btn) {
 	const strBtn = String(btn)
 	if (checkIfNumber(strBtn)) {
 		setValue(strBtn)
-	} else if (strBtn == 'Backspace') {
+	} else if (strBtn == 'Del') {
 		backspace()
 	} else if (strBtn == '+/-') {
 		negate()
@@ -151,9 +153,13 @@ function backspace() {
 		return reset()
 	}	else if ((/[-]/g).test(workingA) && workingA.length < 3) {
 		checkIfProdOrQuot()
-	} else {workingA = workingA.slice(0, -1)}
-
+	} else if (workingA.length < 1) {
+		checkIfProdOrQuot()
+	} else {
+		workingA = workingA.slice(0, -1)
+	}
 	display.textContent = workingA;
+
 }
 
 function negate() {
@@ -171,7 +177,7 @@ function toggleNegativeA() {
 
 function toggleNegativeB() {
 	if (workingB == '') {return}
-		
+
 	if ((/[-]/g).test(workingB)) {
 		workingB = workingB.match(/[0-9.]/g).join('')
 	} else {workingB = "".concat("-",workingB)}
