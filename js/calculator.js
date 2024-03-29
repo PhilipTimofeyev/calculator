@@ -124,7 +124,7 @@ function checkIfProdOrQuot() {
 	if ((lastOperand == '*') || (lastOperand == '/')) {
 		workingA = '1'
 	} else {
-		workingA = ''
+		workingA = '0'
 	}
 }
 
@@ -132,6 +132,7 @@ function setValue(btn) {
 	if (workingA.length > 10) {return}
 	if (equalUsed) {reset()}
 	workingA += btn;
+	workingA = workingA.replace(/^0+/, '')
 	display.textContent = workingA;
 }
 
@@ -150,11 +151,12 @@ function removePoint() {
 }
 
 function backspace() {
+	console.log(workingA)
 	if (equalUsed) {
 		return reset()
 	}	else if ((/[-]/g).test(workingA) && workingA.length < 3) {
 		checkIfProdOrQuot()
-	} else if (workingA.length < 1) {
+	} else if (workingA.length <= 1) {
 		checkIfProdOrQuot()
 	} else {
 		workingA = workingA.slice(0, -1)
