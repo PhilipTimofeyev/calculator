@@ -45,7 +45,12 @@ button {
 	min-width: 160px;
 	min-height: 160px;
 	margin: 15px;
-	border: 8px solid black;
-	border-style: ridge;
+	border: 3px solid black;
+}
+
+button:hover {
+  background-color: orange;
+  border-style: ridge;
+  border: 6px solid black;
 }
 
