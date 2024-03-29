@@ -4,6 +4,14 @@ const display = document.querySelector(".display");
 const rowFour = document.querySelector(".row-four");
 const pointNode = document.querySelector("#point");
 
+document.addEventListener('keydown', (event)=> {    
+  let input = event.key
+
+  if ((/[1-9./+=*-]/g).test(input) || event.key == 'Backspace') {
+  	respond(input)
+  }
+});
+
 let workingA = ''
 let workingB = ''
 let lastOperand = ''
@@ -20,13 +28,15 @@ document.addEventListener('click', function(e){
   	console.log(`equals: ${equalUsed}`)
 })
 
-
 function respond(btn) {	
 	const strBtn = String(btn)
 
 	if (checkIfNumber(strBtn)) {
 		workingA += btn;
 		display.textContent = workingA;
+
+	} else if (strBtn == 'Backspace') {
+		backspace()
 
 	} else if (strBtn == '=') {
 		equals()
@@ -134,4 +144,12 @@ function removePoint() {
 		point = true
 	}
 }
+
+function backspace() {
+	workingA = workingA.slice(0, -1)
+	display.textContent = workingA;
+}
+
+
+
 
