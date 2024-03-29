@@ -129,6 +129,7 @@ function checkIfProdOrQuot() {
 }
 
 function setValue(btn) {
+	if (workingA.length > 10) {return}
 	if (equalUsed) {reset()}
 	workingA += btn;
 	display.textContent = workingA;
