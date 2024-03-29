@@ -5,8 +5,6 @@ const rowFour = document.querySelector(".row-four");
 const pointNode = document.querySelector("#point");
 
 document.addEventListener('keydown', (event)=> {    
-    
-
     let input = event.key
 
     if ((/[0-9/+=*-]/g).test(input) || event.key == 'Backspace') {
@@ -37,9 +35,7 @@ function respond(btn) {
 	const strBtn = String(btn)
 
 	if (checkIfNumber(strBtn)) {
-		if (equalUsed) {reset()}
-		workingA += btn;
-		display.textContent = workingA;
+		setValue(strBtn)
 
 	} else if (strBtn == 'Backspace') {
 		backspace()
@@ -135,6 +131,12 @@ function checkIfProdOrQuot() {
 	} else {
 		workingA = ''
 	}
+}
+
+function setValue(btn) {
+	if (equalUsed) {reset()}
+	workingA += btn;
+	display.textContent = workingA;
 }
 
 function roundTo(num, tenth) {
