@@ -71,13 +71,7 @@ function setValue(btn) {
 function operatorLogic(currentOperand){
 	if (workingB == '') {
 		workingB = workingA
-
-	} else if (lastOperand == currentOperand && equalUsed) {
-		checkIfProdOrQuot()
-		operate(currentOperand)
-	}	else if (lastOperand == currentOperand){
-		operate(currentOperand)
-	} else if (equalUsed) {
+	}	else if (equalUsed) {
 		checkIfProdOrQuot()
 		operate(lastOperand)
 	} else {operate(lastOperand)
