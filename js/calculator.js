@@ -10,7 +10,15 @@ let point = true
 
 display.textContent = '0'
 
-document.addEventListener('keydown', (event)=> {    
+document.addEventListener('keydown', (event) => {
+	keyInputParser(event)  
+  });
+
+document.addEventListener('click', function(e){
+  if(e.target.tagName=="BUTTON"){respond(e.target.innerHTML)}
+})
+
+function keyInputParser (event) {    
   let input = event.key
 
   if ((/[0-9/+=%*-]/g).test(input)) {
@@ -20,12 +28,7 @@ document.addEventListener('keydown', (event)=> {
   } else if (input == 'Backspace') {
   	respond('Del')
   }
-});
-
-document.addEventListener('click', function(e){
-  if(e.target.tagName=="BUTTON"){respond(e.target.innerHTML)}
-})
-
+};
 
 function respond(btn) {	
 	const strBtn = String(btn)
