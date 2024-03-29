@@ -5,11 +5,15 @@ const rowFour = document.querySelector(".row-four");
 const pointNode = document.querySelector("#point");
 
 document.addEventListener('keydown', (event)=> {    
-  let input = event.key
+    
 
-  if ((/[1-9./+=*-]/g).test(input) || event.key == 'Backspace') {
-  	respond(input)
-  }
+    let input = event.key
+
+    if ((/[0-9/+=*-]/g).test(input) || event.key == 'Backspace') {
+    	respond(input)
+    } else if (input == '.' && !(/[.]/g).test(workingA)) {
+    	respond(input)
+    }
 });
 
 let workingA = ''
@@ -27,6 +31,7 @@ document.addEventListener('click', function(e){
   	console.log(`Oper: ${lastOperand}`)
   	console.log(`equals: ${equalUsed}`)
 })
+
 
 function respond(btn) {	
 	const strBtn = String(btn)
@@ -56,7 +61,7 @@ function operatorLogic(currentOperand){
 		workingB = workingA
 
 	} else if (lastOperand == currentOperand){
-		checkIfProdOrQuot()
+		// checkIfProdOrQuot()
 		operate(currentOperand)
 
 	} else if (equalUsed == true) {
