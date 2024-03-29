@@ -10,7 +10,7 @@ let point = true
 
 display.setAttribute("style", "font-family: BlinkMacSystemFont")
 
-display.textContent = '0'
+display.textContent = workingA
 
 document.addEventListener('keydown', (event) => {
 	keyInputParser(event) 
@@ -55,6 +55,19 @@ function respond(btn) {
 	modifyPoint()
 }
 
+function checkIfNumber(str){
+	return (/[0-9.]/g).test(str)
+}
+
+function setValue(btn) {
+	if (workingA.length > 10) {return}
+	if (workingA == '0' && btn == '0') {return}
+	if (equalUsed) {reset()} //Resets if number typed without modifier
+	workingA += btn;
+	workingA = workingA.replace(/^0+/, '')
+	display.textContent = workingA;
+}
+
 function operatorLogic(currentOperand){
 	if (workingB == '') {
 		workingB = workingA
@@ -71,6 +84,14 @@ function operatorLogic(currentOperand){
 	}
 	workingA = ''
 	lastOperand = currentOperand;
+}
+
+function checkIfProdOrQuot() {
+	if ((lastOperand == '*') || (lastOperand == '/')) {
+		workingA = '1'
+	} else {
+		workingA = '0'
+	}
 }
 
 function operate(operand) {
@@ -123,24 +144,8 @@ function reset() {
 	equalUsed = false
 }
 
-function checkIfNumber(str){
-	return (/[0-9.]/g).test(str)
-}
-
-function checkIfProdOrQuot() {
-	if ((lastOperand == '*') || (lastOperand == '/')) {
-		workingA = '1'
-	} else {
-		workingA = '0'
-	}
-}
-
-function setValue(btn) {
-	if (workingA.length > 10) {return}
-	if (equalUsed) {reset()}
-	workingA += btn;
-	workingA = workingA.replace(/^0+/, '')
-	display.textContent = workingA;
+function checkIfZero() {
+	workingA == ''
 }
 
 function roundTo(num, tenth) {
