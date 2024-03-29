@@ -1,8 +1,14 @@
-const container = document.querySelector(".container");
-const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
 const rowFour = document.querySelector(".row-four");
 const pointNode = document.querySelector("#point");
+
+let workingA = ''
+let workingB = ''
+let lastOperand = ''
+let equalUsed = false
+let point = true
+
+display.textContent = '0'
 
 document.addEventListener('keydown', (event)=> {    
   let input = event.key
@@ -14,20 +20,8 @@ document.addEventListener('keydown', (event)=> {
   }
 });
 
-let workingA = ''
-let workingB = ''
-let lastOperand = ''
-let equalUsed = false
-let point = true
-
-display.textContent = '0'
-
 document.addEventListener('click', function(e){
   if(e.target.tagName=="BUTTON"){respond(e.target.innerHTML)}
-  	console.log(`A: ${workingA}`)
-  	console.log(`B: ${workingB}`)
-  	console.log(`Oper: ${lastOperand}`)
-  	console.log(`equals: ${equalUsed}`)
 })
 
 
@@ -60,11 +54,14 @@ function operatorLogic(currentOperand){
 	if (workingB == '') {
 		workingB = workingA
 
-	} else if (lastOperand == currentOperand){
-		// checkIfProdOrQuot()
+	} else if (lastOperand == currentOperand && equalUsed) {
+		checkIfProdOrQuot()
 		operate(currentOperand)
 
-	} else if (equalUsed == true) {
+	}	else if (lastOperand == currentOperand){
+		operate(currentOperand)
+
+	} else if (equalUsed) {
 		checkIfProdOrQuot()
 		operate(lastOperand)
 
@@ -162,10 +159,8 @@ function backspace() {
 }
 
 function negate() {
-	if (equalUsed) {
-		toggleNegativeB()
-	} else toggleNegativeA()
-	}
+	equalUsed ? toggleNegativeB() : toggleNegativeA()
+}
 
 	function toggleNegativeA() {
 		if (workingA == '') {return}
@@ -173,8 +168,7 @@ function negate() {
 			workingA = workingA.match(/[0-9.]/g).join('')
 
 		} else {workingA = "".concat("-",workingA)}
-		display.textContent = workingA
-		
+		display.textContent = workingA	
 	}
 
 	function toggleNegativeB() {
@@ -186,10 +180,6 @@ function negate() {
 		display.textContent = workingB
 		
 	}
-
-// function test() {
-// 	equalUsed ? negate(workingB) : negate(workingA)
-// }
 
 
 
