@@ -27,22 +27,16 @@ document.addEventListener('click', function(e){
 
 function respond(btn) {	
 	const strBtn = String(btn)
-
 	if (checkIfNumber(strBtn)) {
 		setValue(strBtn)
-
 	} else if (strBtn == 'Backspace') {
 		backspace()
-
 	} else if (strBtn == '+/-') {
 		negate()
-
 	} else if (strBtn == '=') {
 		equals()
-
 	} else if (strBtn == 'AC'){
 		reset()
-
 	} else if (strBtn == '%') {
 		convertToPercent()
 	}	else {
@@ -59,14 +53,11 @@ function operatorLogic(currentOperand){
 	} else if (lastOperand == currentOperand && equalUsed) {
 		checkIfProdOrQuot()
 		operate(currentOperand)
-
 	}	else if (lastOperand == currentOperand){
 		operate(currentOperand)
-
 	} else if (equalUsed) {
 		checkIfProdOrQuot()
 		operate(lastOperand)
-
 	} else {operate(lastOperand)
 	}
 	workingA = ''
@@ -158,11 +149,8 @@ function removePoint() {
 function backspace() {
 	if (equalUsed) {
 		return reset()
-	}
-
-	else if ((/[-]/g).test(workingA) && workingA.length < 3) {
+	}	else if ((/[-]/g).test(workingA) && workingA.length < 3) {
 		checkIfProdOrQuot()
-
 	} else {workingA = workingA.slice(0, -1)}
 
 	display.textContent = workingA;
@@ -177,16 +165,15 @@ function toggleNegativeA() {
 
 	if ((/[-]/g).test(workingA)) {
 		workingA = workingA.match(/[0-9.]/g).join('')
-
 	} else {workingA = "".concat("-",workingA)}
 	display.textContent = workingA	
 }
 
 function toggleNegativeB() {
 	if (workingB == '') {return}
+		
 	if ((/[-]/g).test(workingB)) {
 		workingB = workingB.match(/[0-9.]/g).join('')
-
 	} else {workingB = "".concat("-",workingB)}
 	display.textContent = workingB
 }
