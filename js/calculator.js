@@ -8,6 +8,8 @@ let lastOperand = ''
 let equalUsed = false
 let point = true
 
+display.setAttribute("style", "font-family: BlinkMacSystemFont")
+
 display.textContent = '0'
 
 document.addEventListener('keydown', (event) => {
