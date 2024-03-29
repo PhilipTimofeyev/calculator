@@ -62,10 +62,14 @@ function checkIfNumber(str){
 
 function setValue(btn) {
 	if (workingA.length > 10) {return}
-	if (workingA == '0' && btn == '0') {return}
+	if (workingA == '0' && btn == '0') {return} //prevents leading zeroes
 	if (equalUsed) {reset()} //Resets if number typed without modifier
-	workingA += btn;
-	workingA = workingA.replace(/^0+/, '')
+
+	if (workingA == '0') {
+		workingA = ''
+		workingA += btn
+	} else {workingA += btn}
+
 	display.textContent = workingA;
 }
 
@@ -121,7 +125,7 @@ function subtract(a, b) {return (a - b)}
 function multiply(a, b) {return (a * b)}
 
 function divide(a, b) {
-	return b == 0 ? display.textContent = 'NO DIVIDING BY ZERO' : (a / b)
+	return b == 0 ? display.textContent = "Can't divide by 0" : (a / b)
 }
 
 function equals() {
