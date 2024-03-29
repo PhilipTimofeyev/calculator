@@ -5,13 +5,13 @@ const rowFour = document.querySelector(".row-four");
 const pointNode = document.querySelector("#point");
 
 document.addEventListener('keydown', (event)=> {    
-    let input = event.key
+  let input = event.key
 
-    if ((/[0-9/+=*-]/g).test(input) || event.key == 'Backspace') {
-    	respond(input)
-    } else if (input == '.' && !(/[.]/g).test(workingA)) {
-    	respond(input)
-    }
+  if ((/[0-9/+=*-]/g).test(input) || event.key == 'Backspace') {
+  	respond(input)
+  } else if (input == '.' && !(/[.]/g).test(workingA)) {
+  	respond(input)
+  }
 });
 
 let workingA = ''
@@ -39,6 +39,9 @@ function respond(btn) {
 
 	} else if (strBtn == 'Backspace') {
 		backspace()
+
+	} else if (strBtn == '+/-') {
+		negate()
 
 	} else if (strBtn == '=') {
 		equals()
@@ -157,6 +160,36 @@ function backspace() {
 	workingA = workingA.slice(0, -1)
 	display.textContent = workingA;
 }
+
+function negate() {
+	if (equalUsed) {
+		toggleNegativeB()
+	} else toggleNegativeA()
+	}
+
+	function toggleNegativeA() {
+		if (workingA == '') {return}
+		if ((/[-]/g).test(workingA)) {
+			workingA = workingA.match(/[0-9.]/g).join('')
+
+		} else {workingA = "".concat("-",workingA)}
+		display.textContent = workingA
+		
+	}
+
+	function toggleNegativeB() {
+		if (workingB == '') {return}
+		if ((/[-]/g).test(workingB)) {
+			workingB = workingB.match(/[0-9.]/g).join('')
+
+		} else {workingB = "".concat("-",workingB)}
+		display.textContent = workingB
+		
+	}
+
+// function test() {
+// 	equalUsed ? negate(workingB) : negate(workingA)
+// }
 
 
 
