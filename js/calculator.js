@@ -2,7 +2,7 @@ const display = document.querySelector(".display");
 const rowFour = document.querySelector(".row-four");
 const pointNode = document.querySelector("#point");
 
-let workingA = '0'
+let workingA = ''
 let workingB = ''
 let lastOperand = ''
 let equalUsed = false
@@ -10,12 +10,13 @@ let point = true
 
 display.setAttribute("style", "font-family: BlinkMacSystemFont")
 
-display.textContent = workingA
+display.textContent = '0'
 
 document.addEventListener('keydown', (event) => {
 	keyInputParser(event) 
 	console.log(`A: ${workingA}`)
 	console.log(`B: ${workingB}`)
+	console.log(`equal: ${equalUsed}`)
   });
 
 document.addEventListener('click', function(e){
@@ -124,7 +125,7 @@ function divide(a, b) {
 }
 
 function equals() {
-	if (workingB == '') {return}
+	if (workingA == '' && workingB == '') {return}
 
 	operate(lastOperand);
 	equalUsed = true;
@@ -170,7 +171,6 @@ function backspace() {
 		workingA = workingA.slice(0, -1)
 	}
 	display.textContent = workingA;
-
 }
 
 function negate() {
