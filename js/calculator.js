@@ -154,7 +154,15 @@ function removePoint() {
 }
 
 function backspace() {
-	workingA = workingA.slice(0, -1)
+	if (equalUsed) {
+		return reset()
+	}
+
+	else if ((/[-]/g).test(workingA) && workingA.length < 3) {
+		checkIfProdOrQuot()
+
+	} else {workingA = workingA.slice(0, -1)}
+
 	display.textContent = workingA;
 }
 
@@ -164,6 +172,7 @@ function negate() {
 
 	function toggleNegativeA() {
 		if (workingA == '') {return}
+
 		if ((/[-]/g).test(workingA)) {
 			workingA = workingA.match(/[0-9.]/g).join('')
 
