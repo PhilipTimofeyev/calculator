@@ -2,7 +2,7 @@ const display = document.querySelector(".display");
 const rowFour = document.querySelector(".row-four");
 const pointNode = document.querySelector("#point");
 
-let workingA = ''
+let workingA = '0'
 let workingB = ''
 let lastOperand = ''
 let equalUsed = false
@@ -13,7 +13,9 @@ display.setAttribute("style", "font-family: BlinkMacSystemFont")
 display.textContent = '0'
 
 document.addEventListener('keydown', (event) => {
-	keyInputParser(event)  
+	keyInputParser(event) 
+	console.log(`A: ${workingA}`)
+	console.log(`B: ${workingB}`)
   });
 
 document.addEventListener('click', function(e){
@@ -50,7 +52,7 @@ function respond(btn) {
 		operatorLogic(strBtn);
 		equalUsed = false;
 	}
-	removePoint()
+	modifyPoint()
 }
 
 function operatorLogic(currentOperand){
@@ -145,11 +147,14 @@ function roundTo(num, tenth) {
 	return parseFloat(num.toFixed(tenth))
 }
 
-function removePoint() {
+function modifyPoint() {
 	if ((/[.]/g).test(workingA) && point) {
 		rowFour.removeChild(pointNode);
 		point = false;
 	} else if (workingA == '') {
+		rowFour.appendChild(pointNode)
+		point = true
+	} else if (equalUsed) {
 		rowFour.appendChild(pointNode)
 		point = true
 	}
