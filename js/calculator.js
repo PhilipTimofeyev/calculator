@@ -14,9 +14,6 @@ display.textContent = '0'
 
 document.addEventListener('keydown', (event) => {
 	keyInputParser(event) 
-	console.log(`A: ${workingA}`)
-	console.log(`B: ${workingB}`)
-	console.log(`equal: ${equalUsed}`)
   });
 
 document.addEventListener('click', function(e){
@@ -185,7 +182,7 @@ function toggleNegativeA() {
 	if (workingA == '') {return}
 
 	if ((/[-]/g).test(workingA)) {
-		workingA = workingA.match(/[0-9.]/g).join('')
+		workingA = String(workingA).match(/[0-9.]/g).join('')
 	} else {workingA = "".concat("-",workingA)}
 	display.textContent = workingA	
 }
@@ -194,7 +191,7 @@ function toggleNegativeB() {
 	if (workingB == '') {return}
 
 	if ((/[-]/g).test(workingB)) {
-		workingB = workingB.match(/[0-9.]/g).join('')
+		workingB = String(workingB).match(/[0-9.]/g).join('')
 	} else {workingB = "".concat("-",workingB)}
 	display.textContent = workingB
 }
